@@ -2,8 +2,8 @@ package ru.sfwt.mt.sandbox;
 
 public class MyFirstProgram {
 
-	public static void main(String[] args) {
-		System.out.println("Hell, world!");
+  public static void main(String[] args) {
+    System.out.println("Hell, world!");
 
-	}
+  }
 }
