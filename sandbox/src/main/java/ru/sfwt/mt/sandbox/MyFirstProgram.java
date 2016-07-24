@@ -16,7 +16,7 @@ public class MyFirstProgram {
     Rectangle r = new Rectangle(5, 6);
     System.out.println("S прямоугольника со сторонами " + r.a + " и " + r.b + " = " + r.area());
 
-    Point point1 = new Point();
+    Point point1 = new Point(1, 2);
     point1.x = 1;
     point1.y = 2;
 
