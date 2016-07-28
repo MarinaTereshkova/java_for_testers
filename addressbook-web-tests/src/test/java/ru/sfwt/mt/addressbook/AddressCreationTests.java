@@ -21,11 +21,12 @@ public class AddressCreationTests {
     public void setUp() throws Exception {
         wd = new FirefoxDriver();
         wd.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
+        wd.get("http://localhost/addressbook/");
+        login();
     }
-    
-    @Test
-    public void AddressCreationTests() {
-        wd.get("http://localhost/addressbook/delete.php?part=1;");
+
+    private void login() {
+        wd.findElement(By.id("LoginForm")).click();
         wd.findElement(By.name("user")).click();
         wd.findElement(By.name("user")).clear();
         wd.findElement(By.name("user")).sendKeys("admin");
@@ -33,40 +34,58 @@ public class AddressCreationTests {
         wd.findElement(By.name("pass")).clear();
         wd.findElement(By.name("pass")).sendKeys("secret");
         wd.findElement(By.xpath("//form[@id='LoginForm']/input[3]")).click();
-        wd.findElement(By.linkText("add new")).click();
+    }
+
+    @Test
+    public void testAddressCreation() {
+        gotoAddreessCreationPage();
+        fillAddressForm();
+        enterAddressCreation();
+        returnToHomePage();
+    }
+
+    private void returnToHomePage() {
+        wd.findElement(By.linkText("home")).click();
+    }
+
+    private void enterAddressCreation() {
+        wd.findElement(By.xpath("//div[@id='content']/form/input[21]")).click();
+    }
+
+    private void fillAddressForm() {
         wd.findElement(By.name("firstname")).click();
         wd.findElement(By.name("firstname")).clear();
-        wd.findElement(By.name("firstname")).sendKeys("FirstName");
+        wd.findElement(By.name("firstname")).sendKeys("name");
         wd.findElement(By.name("lastname")).click();
         wd.findElement(By.name("lastname")).clear();
-        wd.findElement(By.name("lastname")).sendKeys("LastName");
+        wd.findElement(By.name("lastname")).sendKeys("last");
         wd.findElement(By.name("address")).click();
         wd.findElement(By.name("address")).clear();
         wd.findElement(By.name("address")).sendKeys("Address");
         wd.findElement(By.name("home")).click();
         wd.findElement(By.name("home")).clear();
-        wd.findElement(By.name("home")).sendKeys("1234567");
+        wd.findElement(By.name("home")).sendKeys("098765");
         wd.findElement(By.name("mobile")).click();
         wd.findElement(By.name("mobile")).clear();
-        wd.findElement(By.name("mobile")).sendKeys("+7911123456789");
+        wd.findElement(By.name("mobile")).sendKeys("98765");
         wd.findElement(By.name("work")).click();
         wd.findElement(By.name("work")).clear();
-        wd.findElement(By.name("work")).sendKeys("88121234567");
+        wd.findElement(By.name("work")).sendKeys("87654");
         wd.findElement(By.name("email")).click();
         wd.findElement(By.name("email")).clear();
-        wd.findElement(By.name("email")).sendKeys("e-mail");
-        wd.findElement(By.name("theform")).click();
+        wd.findElement(By.name("email")).sendKeys("mail_1");
         wd.findElement(By.name("email2")).click();
         wd.findElement(By.name("email2")).clear();
-        wd.findElement(By.name("email2")).sendKeys("e-mail2");
+        wd.findElement(By.name("email2")).sendKeys("mail_2");
         wd.findElement(By.name("email3")).click();
         wd.findElement(By.name("email3")).clear();
-        wd.findElement(By.name("email3")).sendKeys("e-mail3");
-        wd.findElement(By.name("theform")).click();
-        wd.findElement(By.xpath("//div[@id='content']/form/input[21]")).click();
-        wd.findElement(By.xpath("//div/div[4]/div/i/a[2]")).click();
+        wd.findElement(By.name("email3")).sendKeys("mail_3");
     }
-    
+
+    private void gotoAddreessCreationPage() {
+        wd.findElement(By.linkText("add new")).click();
+    }
+
     @AfterMethod
     public void tearDown() {
         wd.quit();
