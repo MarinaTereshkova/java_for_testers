@@ -1,4 +1,4 @@
-package ru.sfwt.mt.addressbook;
+package ru.sfwt.mt.addressbook.model;
 
 public class AddressData {
   private final String firstname;
