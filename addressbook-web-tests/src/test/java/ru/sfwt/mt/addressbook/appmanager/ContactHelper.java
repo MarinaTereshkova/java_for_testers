@@ -37,4 +37,9 @@ public class ContactHelper extends HelperBase {
   public void submitAddressModification() {
     click(By.name("update"));
   }
+
+  public void deleteSelectAddress() {
+    click(By.xpath("//div/div[4]/form[2]/input[2]"));
+  }
+
 }
