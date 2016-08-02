@@ -29,4 +29,12 @@ public class ContactHelper extends HelperBase {
     type("email2", addressData.getEmail2());
     type("email3", addressData.getEmail3());
     }
+
+  public void selectAddress() {
+    click(By.xpath("//div/div[4]/form[2]/table/tbody/tr[5]/td[8]/a/img"));
+  }
+
+  public void submitAddressModification() {
+    click(By.name("update"));
+  }
 }
