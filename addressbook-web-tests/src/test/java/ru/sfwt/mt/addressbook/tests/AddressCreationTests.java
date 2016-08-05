@@ -8,7 +8,7 @@ public class AddressCreationTests extends TestBase{
   @Test
   public void testAddressCreation() {
     app.getNavigationHelper().gotoAddreessCreationPage();
-    app.getContactHelper().fillAddressForm(new AddressData("name", "last", null, null, null, null, null, null, null));
+    app.getContactHelper().fillAddressForm(new AddressData("name", "last", null, null, null, null, null, null, null,"test1"));
     app.getContactHelper().enterAddressCreation();
     app.getContactHelper().returnToHomePage();
   }

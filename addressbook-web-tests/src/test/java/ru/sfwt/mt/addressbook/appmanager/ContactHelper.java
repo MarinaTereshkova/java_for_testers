@@ -1,8 +1,10 @@
 package ru.sfwt.mt.addressbook.appmanager;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.ui.Select;
 import ru.sfwt.mt.addressbook.model.AddressData;
 
 public class ContactHelper extends HelperBase {
@@ -29,7 +31,11 @@ public class ContactHelper extends HelperBase {
     type("email", addressData.getEmail1());
     type("email2", addressData.getEmail2());
     type("email3", addressData.getEmail3());
+
+    if (isElementPresent(By.name("new_group"))) {
+      new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(addressData.getGroup());
     }
+  }
 
   public void selectAddress() {
     click(By.xpath("//div/div[4]/form[2]/table/tbody/tr[5]/td[8]/a/img"));

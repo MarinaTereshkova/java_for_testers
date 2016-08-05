@@ -10,8 +10,9 @@ public class AddressData {
   private final String email1;
   private final String email2;
   private final String email3;
+  private String group;
 
-  public AddressData(String firstname, String lastname, String address, String homenumber, String mobilenumber, String worknumber, String email1, String email2, String email3) {
+  public AddressData(String firstname, String lastname, String address, String homenumber, String mobilenumber, String worknumber, String email1, String email2, String email3, String group) {
     this.firstname = firstname;
     this.lastname = lastname;
     this.address = address;
@@ -21,6 +22,7 @@ public class AddressData {
     this.email1 = email1;
     this.email2 = email2;
     this.email3 = email3;
+    this.group = group;
   }
 
   public String getFirstname() {
@@ -57,5 +59,9 @@ public class AddressData {
 
   public String getEmail3() {
     return email3;
+  }
+
+  public String getGroup() {
+    return group;
   }
 }
