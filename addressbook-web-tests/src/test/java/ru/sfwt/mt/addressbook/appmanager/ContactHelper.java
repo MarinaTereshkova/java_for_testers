@@ -60,6 +60,6 @@ public class ContactHelper extends HelperBase {
   }
 
   public boolean isThereAnAderess() {
-    return isElementPresent(By.name("//table[@id='maintable']/tbody/tr[2]/td[8]/a/img"));
+    return isElementPresent(By.xpath("//table[@id='maintable']/tbody/tr[2]/td[8]/a/img"));
   }
 }
