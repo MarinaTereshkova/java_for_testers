@@ -41,7 +41,8 @@ public class ContactHelper extends HelperBase {
   }
 
   public void selectAddress() {
-    click(By.xpath("//div/div[4]/form[2]/table/tbody/tr[5]/td[8]/a/img"));
+//    click(By.xpath("//div/div[4]/form[2]/table/tbody/tr[5]/td[8]/a/img"));
+    click(By.xpath("//table[@id='maintable']/tbody/tr[2]/td[8]/a/img"));
   }
 
   public void submitAddressModification() {
@@ -52,4 +53,13 @@ public class ContactHelper extends HelperBase {
     click(By.xpath("//div/div[4]/form[2]/input[2]"));
   }
 
+  public void createAddress(AddressData address, boolean b) {
+    fillAddressForm(address, b);
+    enterAddressCreation();
+    returnToHomePage();
+  }
+
+  public boolean isThereAnAderess() {
+    return isElementPresent(By.name("//table[@id='maintable']/tbody/tr[2]/td[8]/a/img"));
+  }
 }
