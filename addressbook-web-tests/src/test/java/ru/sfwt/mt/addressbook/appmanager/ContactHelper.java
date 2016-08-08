@@ -53,13 +53,14 @@ public class ContactHelper extends HelperBase {
     click(By.xpath("//div/div[4]/form[2]/input[2]"));
   }
 
-  public void createAddress(AddressData address, boolean b) {
-    fillAddressForm(address, b);
+  public void createAddress(AddressData address) {
+    fillAddressForm(address, true);
     enterAddressCreation();
     returnToHomePage();
   }
 
   public boolean isThereAnAderess() {
-    return isElementPresent(By.xpath("//table[@id='maintable']/tbody/tr[2]/td[8]/a/img"));
+    //return isElementPresent(By.xpath("//table[@id='maintable']/tbody/tr[2]/td[8]/a/img"));
+    return isElementPresent(By.xpath("//table[@id='maintable']//tr[2]"));
   }
 }

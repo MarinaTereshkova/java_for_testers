@@ -10,7 +10,7 @@ public class AddressModificationTests extends TestBase {
     app.getNavigationHelper().gotoHomePage();
     if (! app.getContactHelper().isThereAnAderess()) {
       app.getNavigationHelper().gotoAddreessCreationPage();
-      app.getContactHelper().createAddress(new AddressData("name", "last", null, null, null, null, null, null, null,"test1"), true);
+      app.getContactHelper().createAddress(new AddressData("name", "last", null, null, null, null, null, null, null,"test1"));
     }
     app.getContactHelper().selectAddress();
     app.getContactHelper().fillAddressForm(new AddressData("name", "last", "Address", "098765", "98765", "87654", "mail_1", "mail_2", "mail_3", null), false);
