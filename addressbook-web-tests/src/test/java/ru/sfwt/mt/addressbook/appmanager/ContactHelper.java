@@ -80,7 +80,8 @@ public class ContactHelper extends HelperBase {
     for (WebElement element : elements) {
       String firstname = element.findElement(By.xpath("./td[3]")).getText();
       String lastname = element.findElement(By.xpath("./td[2]")).getText();
-      AddressData address = new AddressData(firstname, lastname, null, null, null, null, null, null, null, null);
+      String id = element.findElement(By.tagName("input")).getAttribute("value");
+      AddressData address = new AddressData(id, firstname, lastname, null, null, null, null, null, null, null, null);
       addresses.add(address);
     }
     return addresses;
