@@ -3,6 +3,7 @@ package ru.sfwt.mt.addressbook.appmanager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
@@ -40,9 +41,10 @@ public class ContactHelper extends HelperBase {
     }
   }
 
-  public void selectAddress() {
-//    click(By.xpath("//div/div[4]/form[2]/table/tbody/tr[5]/td[8]/a/img"));
-    click(By.xpath("//table[@id='maintable']/tbody/tr[2]/td[8]/a/img"));
+  public void selectAddress(int index) {
+     //click(By.xpath("//table[@id='maintable']/tbody/tr[2]/td[8]/a/img"));
+    WebElement row = wd.findElements(By.cssSelector("tr[name=entry]")).get(index);
+    row.findElement(By.xpath("./td[8]/a/img")).click();
   }
 
   public void submitAddressModification() {
