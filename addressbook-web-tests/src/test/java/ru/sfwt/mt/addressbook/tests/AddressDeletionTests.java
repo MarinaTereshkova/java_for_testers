@@ -15,7 +15,7 @@ public class AddressDeletionTests extends TestBase {
       app.getNavigationHelper().gotoAddreessCreationPage();
       app.getContactHelper().createAddress(new AddressData("name", "last", null, null, null, null, null, null, null,"test1"));
     }
-    app.getContactHelper().selectAddress();
+    app.getContactHelper().selectAddress(before - 1);
     app.getContactHelper().deleteSelectAddress();
     app.getContactHelper().returnToHomePage();
     int after = app.getContactHelper().getAddressCount();
