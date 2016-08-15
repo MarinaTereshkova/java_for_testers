@@ -8,7 +8,7 @@ import java.util.List;
 
 public class AddressDeletionTests extends TestBase {
 
-  @Test
+  @Test (enabled = false)
   public void testAddressDeletion (){
     app.getNavigationHelper().gotoHomePage();
     List<AddressData> before = app.getContactHelper().getAddressList();

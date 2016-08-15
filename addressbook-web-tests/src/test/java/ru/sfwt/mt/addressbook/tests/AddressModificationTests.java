@@ -10,7 +10,7 @@ import java.util.List;
 
 public class AddressModificationTests extends TestBase {
 
-  @Test
+  @Test (enabled = false)
   public void testAddressModification() {
     app.getNavigationHelper().gotoHomePage();
     List<AddressData> before = app.getContactHelper().getAddressList();
