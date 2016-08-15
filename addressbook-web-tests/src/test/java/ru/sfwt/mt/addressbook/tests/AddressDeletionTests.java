@@ -1,6 +1,5 @@
 package ru.sfwt.mt.addressbook.tests;
 
-import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import ru.sfwt.mt.addressbook.model.AddressData;
@@ -22,6 +21,12 @@ public class AddressDeletionTests extends TestBase {
     app.getContactHelper().returnToHomePage();
     List<AddressData> after = app.getContactHelper().getAddressList();
     Assert.assertEquals(after.size(), before.size() - 1);
+
+    before.remove(before.size() - 1);
+    //for (int i = 0; i < after.size(); i++) {
+    //  Assert.assertEquals(before.get(i), after.get(i));
+    //}
+    Assert.assertEquals(before, after);
 
   }
 }
