@@ -14,7 +14,7 @@ public class AddressData {
   private String group;
 
   public AddressData(String firstname, String lastname, String address, String homenumber, String mobilenumber, String worknumber, String email1, String email2, String email3, String group) {
-    this.id = 0;
+    this.id = Integer.MAX_VALUE;
     this.firstname = firstname;
     this.lastname = lastname;
     this.address = address;
@@ -96,7 +96,6 @@ public class AddressData {
 
     AddressData that = (AddressData) o;
 
-    if (id != that.id) return false;
     if (firstname != null ? !firstname.equals(that.firstname) : that.firstname != null) return false;
     return lastname != null ? lastname.equals(that.lastname) : that.lastname == null;
 
@@ -104,8 +103,7 @@ public class AddressData {
 
   @Override
   public int hashCode() {
-    int result = id;
-    result = 31 * result + (firstname != null ? firstname.hashCode() : 0);
+    int result = firstname != null ? firstname.hashCode() : 0;
     result = 31 * result + (lastname != null ? lastname.hashCode() : 0);
     return result;
   }
