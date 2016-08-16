@@ -64,7 +64,12 @@ public class ContactHelper extends HelperBase {
     enterAddressCreation();
     returnToHomePage();
   }
-
+  public void modifyAddress(int index, AddressData address) {
+    selectAddress(index);
+    fillAddressForm(address, false);
+    submitAddressModification();
+    returnToHomePage();
+  }
   public boolean isThereAnAderess() {
     //return isElementPresent(By.xpath("//table[@id='maintable']/tbody/tr[2]/td[8]/a/img"));
     return isElementPresent(By.xpath("//table[@id='maintable']//tr[2]"));

@@ -1,6 +1,7 @@
 package ru.sfwt.mt.addressbook.tests;
 
 import org.testng.Assert;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import ru.sfwt.mt.addressbook.model.AddressData;
 
@@ -8,14 +9,18 @@ import java.util.List;
 
 public class AddressDeletionTests extends TestBase {
 
-  @Test (enabled = false)
-  public void testAddressDeletion (){
+  @BeforeTest
+  public void ensurePrecondition() {
     app.getNavigationHelper().gotoHomePage();
-    List<AddressData> before = app.getContactHelper().getAddressList();
     if (! app.getContactHelper().isThereAnAderess()) {
       app.getNavigationHelper().gotoAddreessCreationPage();
       app.getContactHelper().createAddress(new AddressData("name", "last", null, null, null, null, null, null, null,"test1"));
     }
+  }
+
+  @Test (enabled = false)
+  public void testAddressDeletion (){
+    List<AddressData> before = app.getContactHelper().getAddressList();
     app.getContactHelper().selectAddress(before.size() - 1);
     app.getContactHelper().deleteSelectAddress();
     app.getContactHelper().returnToHomePage();
