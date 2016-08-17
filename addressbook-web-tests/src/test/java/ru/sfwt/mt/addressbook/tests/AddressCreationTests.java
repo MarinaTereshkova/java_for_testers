@@ -11,13 +11,13 @@ public class AddressCreationTests extends TestBase{
 
   @Test (enabled = false)
   public void testAddressCreation() {
-    app.goTo().gotoHomePage();
-    List<AddressData> before = app.getContactHelper().getAddressList();
-    app.goTo().gotoAddreessCreationPage();
+    app.goTo().homePage();
+    List<AddressData> before = app.contact().list();
+    app.goTo().addressCreationPage();
     AddressData address = new AddressData("name", "last", null, null, null, null, null, null, null,"test1");
-    app.getContactHelper().createAddress(address);
-    app.goTo().gotoHomePage();
-    List<AddressData> after = app.getContactHelper().getAddressList();
+    app.contact().create(address);
+    app.goTo().homePage();
+    List<AddressData> after = app.contact().list();
     Assert.assertEquals(after.size(), before.size() + 1);
 
     //address.setId(after.stream().max((Comparator<AddressData>) (o1, o2) -> Integer.compare(o1.getId(), o2.getId())).get().getId());

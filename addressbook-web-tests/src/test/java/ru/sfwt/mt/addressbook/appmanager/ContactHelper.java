@@ -59,15 +59,21 @@ public class ContactHelper extends HelperBase {
     click(By.xpath("//div/div[4]/form[2]/input[2]"));
   }
 
-  public void createAddress(AddressData address) {
+  public void create(AddressData address) {
     fillAddressForm(address, true);
     enterAddressCreation();
     returnToHomePage();
   }
-  public void modifyAddress(int index, AddressData address) {
+  public void modify(int index, AddressData address) {
     selectAddress(index);
     fillAddressForm(address, false);
     submitAddressModification();
+    returnToHomePage();
+  }
+
+  public void delete(int index) {
+    selectAddress(index);
+    deleteSelectAddress();
     returnToHomePage();
   }
   public boolean isThereAnAderess() {
@@ -79,7 +85,7 @@ public class ContactHelper extends HelperBase {
     return wd.findElements(By.name("selected[]")).size();
   }
 
-  public List<AddressData> getAddressList() {
+  public List<AddressData> list() {
     List<AddressData> addresses = new ArrayList<AddressData>();
     List<WebElement> elements = wd.findElements(By.cssSelector("tr[name=entry]"));
     for (WebElement element : elements) {
