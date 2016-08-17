@@ -14,11 +14,11 @@ public class AddressDeletionTests extends TestBase {
     app.goTo().homePage();
     if (app.contact().list().size() == 0) {
       app.goTo().addressCreationPage();
-      app.contact().create(new AddressData("name", "last", null, null, null, null, null, null, null,"test1"));
+      app.contact().create(new AddressData().withFirstname("name").withLastname("last").withGroup("test1"));
     }
   }
 
-  @Test (enabled = false)
+  @Test
   public void testAddressDeletion (){
     List<AddressData> before = app.contact().list();
     int index = before.size() - 1;

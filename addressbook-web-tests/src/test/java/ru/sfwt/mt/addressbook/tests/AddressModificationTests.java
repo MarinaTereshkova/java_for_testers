@@ -15,16 +15,18 @@ public class AddressModificationTests extends TestBase {
     app.goTo().homePage();
     if (app.contact().list().size() == 0) {
       app.goTo().addressCreationPage();
-      app.contact().create(new AddressData("name", "last", null, null, null, null, null, null, null,"test1"));
+      app.contact().create(new AddressData().withFirstname("name").withLastname("last").withGroup("test1"));
     }
   }
 
-  @Test (enabled = false)
+  @Test
   public void testAddressModification() {
     List<AddressData> before = app.contact().list();
     int index = before.size() - 1;
-    AddressData address = new AddressData(before.get(index).getId(), "name", "last", "Address", "098765", "98765", "87654",
-            "mail_1", "mail_2", "mail_3", null);
+    AddressData address = new AddressData()
+            .withId(before.get(index).getId()).withFirstname("name").withLastname("last").withAddress("Address")
+            .withHomenumber("098765").withtMobilenumber("98765").withWorknumber("87654")
+            .withEmail1("mail_1").withEmail2("mail_2").withEmail3("mail_3");
     app.contact().modify(index, address);
     List<AddressData> after = app.contact().list();
     Assert.assertEquals(after.size(), before.size());

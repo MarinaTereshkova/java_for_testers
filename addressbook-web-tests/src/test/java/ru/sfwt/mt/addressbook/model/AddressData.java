@@ -1,44 +1,19 @@
 package ru.sfwt.mt.addressbook.model;
 
 public class AddressData {
-  private int id;
-  private final String firstname;
-  private final String lastname;
-  private final String address;
-  private final String homenumber;
-  private final String mobilenumber;
-  private final String worknumber;
-  private final String email1;
-  private final String email2;
-  private final String email3;
-  private String group;
 
-  public AddressData(String firstname, String lastname, String address, String homenumber, String mobilenumber, String worknumber, String email1, String email2, String email3, String group) {
-    this.id = Integer.MAX_VALUE;
-    this.firstname = firstname;
-    this.lastname = lastname;
-    this.address = address;
-    this.homenumber = homenumber;
-    this.mobilenumber = mobilenumber;
-    this.worknumber = worknumber;
-    this.email1 = email1;
-    this.email2 = email2;
-    this.email3 = email3;
-    this.group = group;
-  }
-  public AddressData(int id, String firstname, String lastname, String address, String homenumber, String mobilenumber, String worknumber, String email1, String email2, String email3, String group) {
-    this.id = id;
-    this.firstname = firstname;
-    this.lastname = lastname;
-    this.address = address;
-    this.homenumber = homenumber;
-    this.mobilenumber = mobilenumber;
-    this.worknumber = worknumber;
-    this.email1 = email1;
-    this.email2 = email2;
-    this.email3 = email3;
-    this.group = group;
-  }
+
+  private int id = Integer.MAX_VALUE;
+  private String firstname;
+  private String lastname;
+  private String address;
+  private String homenumber;
+  private String mobilenumber;
+  private String worknumber;
+  private String email1;
+  private String email2;
+  private String email3;
+  private String group;
 
   public String getFirstname() {
     return firstname;
@@ -112,7 +87,58 @@ public class AddressData {
     return id;
   }
 
-  public void setId(int id) {
+  public AddressData withId(int id) {
     this.id = id;
+    return this;
+  }
+
+  public AddressData withFirstname(String firstname) {
+    this.firstname = firstname;
+    return this;
+  }
+
+  public AddressData withLastname(String lastname) {
+    this.lastname = lastname;
+    return this;
+  }
+
+  public AddressData withAddress(String address) {
+    this.address = address;
+    return this;
+  }
+
+  public AddressData withHomenumber(String homenumber) {
+    this.homenumber = homenumber;
+    return this;
+  }
+
+  public AddressData withtMobilenumber(String mobilenumber) {
+    this.mobilenumber = mobilenumber;
+    return this;
+  }
+
+  public AddressData withWorknumber(String worknumber) {
+    this.worknumber = worknumber;
+    return this;
+  }
+
+  public AddressData withEmail1(String email1) {
+    this.email1 = email1;
+    return this;
+  }
+
+  public AddressData withEmail2(String email2) {
+    this.email2 = email2;
+    return this;
+  }
+
+  public AddressData withEmail3(String email3) {
+    this.email3 = email3;
+    return this;
+  }
+
+  public AddressData withGroup(String group) {
+    this.group = group;
+    return this;
   }
 }
