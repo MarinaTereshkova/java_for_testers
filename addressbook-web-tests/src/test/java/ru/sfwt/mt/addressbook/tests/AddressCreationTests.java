@@ -5,19 +5,18 @@ import org.testng.annotations.Test;
 import ru.sfwt.mt.addressbook.model.AddressData;
 
 import java.util.Comparator;
-import java.util.HashSet;
 import java.util.List;
 
 public class AddressCreationTests extends TestBase{
 
   @Test (enabled = false)
   public void testAddressCreation() {
-    app.getNavigationHelper().gotoHomePage();
+    app.goTo().gotoHomePage();
     List<AddressData> before = app.getContactHelper().getAddressList();
-    app.getNavigationHelper().gotoAddreessCreationPage();
+    app.goTo().gotoAddreessCreationPage();
     AddressData address = new AddressData("name", "last", null, null, null, null, null, null, null,"test1");
     app.getContactHelper().createAddress(address);
-    app.getNavigationHelper().gotoHomePage();
+    app.goTo().gotoHomePage();
     List<AddressData> after = app.getContactHelper().getAddressList();
     Assert.assertEquals(after.size(), before.size() + 1);
 

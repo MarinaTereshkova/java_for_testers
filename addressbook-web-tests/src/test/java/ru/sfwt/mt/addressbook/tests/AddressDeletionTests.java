@@ -11,9 +11,9 @@ public class AddressDeletionTests extends TestBase {
 
   @BeforeTest
   public void ensurePrecondition() {
-    app.getNavigationHelper().gotoHomePage();
+    app.goTo().gotoHomePage();
     if (! app.getContactHelper().isThereAnAderess()) {
-      app.getNavigationHelper().gotoAddreessCreationPage();
+      app.goTo().gotoAddreessCreationPage();
       app.getContactHelper().createAddress(new AddressData("name", "last", null, null, null, null, null, null, null,"test1"));
     }
   }
