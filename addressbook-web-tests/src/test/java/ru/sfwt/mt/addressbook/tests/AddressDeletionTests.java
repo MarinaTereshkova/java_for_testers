@@ -13,7 +13,7 @@ public class AddressDeletionTests extends TestBase {
   @BeforeTest
   public void ensurePrecondition() {
     app.goTo().homePage();
-    if (app.contact().list().size() == 0) {
+    if (app.contact().all().size() == 0) {
       app.goTo().addressCreationPage();
       app.contact().create(new AddressData().withFirstname("name").withLastname("last").withGroup("test1"));
     }

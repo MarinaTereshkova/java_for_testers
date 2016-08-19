@@ -47,19 +47,17 @@ public class ContactHelper extends HelperBase {
     }
   }
 
-  public void selectAddress(int index) {
-     //click(By.xpath("//table[@id='maintable']/tbody/tr[2]/td[8]/a/img"));
-    WebElement row = wd.findElements(By.cssSelector("tr[name=entry]")).get(index);
-    row.findElement(By.xpath("./td[8]/a/img")).click();
-  }
+//  public void selectAddress(int index) {
+//     //click(By.xpath("//table[@id='maintable']/tbody/tr[2]/td[8]/a/img"));
+//    WebElement row = wd.findElements(By.cssSelector("tr[name=entry]")).get(index);
+//    row.findElement(By.xpath("./td[8]/a/img")).click();
+//  }
 
   public void selectAddressById(int id) {
-    //wd.findElement(By.cssSelector("tr[name=entry]>td.classname>input[value='" + id + "']")).click();
-    //row.findElement(By.cssSelector("input[value='" + id + "']")).click();
     WebElement row = wd.findElement(By.cssSelector("tr[name=entry]>td.center>input[value='" + id + "']"));
-    row.findElement(By.xpath("./td[8]/a/img")).click();
-    //wd.findElement(By.cssSelector("tr[name=entry]>td.center>input[value='" + id + "']")).click();
+    row.findElement(By.xpath("./../../td[8]/a/img")).click();
   }
+
   public void submitAddressModification() {
     click(By.name("update"));
   }
@@ -73,18 +71,18 @@ public class ContactHelper extends HelperBase {
     enterAddressCreation();
     returnToHomePage();
   }
-  public void modify(int index, AddressData address) {
-    selectAddress(index);
+  public void modify(AddressData address) {
+    selectAddressById(address.getId());
     fillAddressForm(address, false);
     submitAddressModification();
     returnToHomePage();
   }
 
-  public void delete(int index) {
-    selectAddress(index);
-    deleteSelectAddress();
-    returnToHomePage();
-  }
+//  public void delete(int index) {
+//    selectAddress(index);
+//    deleteSelectAddress();
+//    returnToHomePage();
+//  }
 
   public void delete(AddressData address) {
     selectAddressById(address.getId());
@@ -100,17 +98,17 @@ public class ContactHelper extends HelperBase {
     return wd.findElements(By.name("selected[]")).size();
   }
 
-  public List<AddressData> list() {
-    List<AddressData> addresses = new ArrayList<AddressData>();
-    List<WebElement> elements = wd.findElements(By.cssSelector("tr[name=entry]"));
-    for (WebElement element : elements) {
-      String firstname = element.findElement(By.xpath("./td[3]")).getText();
-      String lastname = element.findElement(By.xpath("./td[2]")).getText();
-      int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
-      addresses.add(new AddressData().withId(id).withFirstname(firstname).withLastname(lastname));
-    }
-    return addresses;
-  }
+//  public List<AddressData> list() {
+//    List<AddressData> addresses = new ArrayList<AddressData>();
+//    List<WebElement> elements = wd.findElements(By.cssSelector("tr[name=entry]"));
+//    for (WebElement element : elements) {
+//      String firstname = element.findElement(By.xpath("./td[3]")).getText();
+//      String lastname = element.findElement(By.xpath("./td[2]")).getText();
+//      int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
+//      addresses.add(new AddressData().withId(id).withFirstname(firstname).withLastname(lastname));
+//    }
+//    return addresses;
+//  }
   public Set<AddressData> all() {
     Set<AddressData> addresses = new HashSet<AddressData>();
     List<WebElement> elements = wd.findElements(By.cssSelector("tr[name=entry]"));
