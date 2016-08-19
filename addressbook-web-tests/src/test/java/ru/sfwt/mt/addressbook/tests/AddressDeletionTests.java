@@ -6,6 +6,7 @@ import org.testng.annotations.Test;
 import ru.sfwt.mt.addressbook.model.AddressData;
 
 import java.util.List;
+import java.util.Set;
 
 public class AddressDeletionTests extends TestBase {
 
@@ -20,13 +21,13 @@ public class AddressDeletionTests extends TestBase {
 
   @Test
   public void testAddressDeletion (){
-    List<AddressData> before = app.contact().list();
-    int index = before.size() - 1;
-    app.contact().delete(index);
-    List<AddressData> after = app.contact().list();
+    Set<AddressData> before = app.contact().all();
+    AddressData deletedAddress = before.iterator().next();
+    app.contact().delete(deletedAddress);
+    Set<AddressData> after = app.contact().all();
     Assert.assertEquals(after.size(), before.size() - 1);
 
-    before.remove(index);
+    before.remove(deletedAddress);
     Assert.assertEquals(before, after);
 
   }
