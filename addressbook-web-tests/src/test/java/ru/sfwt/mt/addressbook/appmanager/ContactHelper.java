@@ -8,6 +8,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import ru.sfwt.mt.addressbook.model.AddressData;
+import ru.sfwt.mt.addressbook.model.Addresses;
 import ru.sfwt.mt.addressbook.model.GroupData;
 
 import java.util.ArrayList;
@@ -109,8 +110,8 @@ public class ContactHelper extends HelperBase {
 //    }
 //    return addresses;
 //  }
-  public Set<AddressData> all() {
-    Set<AddressData> addresses = new HashSet<AddressData>();
+  public Addresses all() {
+    Addresses  addresses = new Addresses();
     List<WebElement> elements = wd.findElements(By.cssSelector("tr[name=entry]"));
     for (WebElement element : elements) {
       String firstname = element.findElement(By.xpath("./td[3]")).getText();
