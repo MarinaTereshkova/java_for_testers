@@ -70,12 +70,14 @@ public class ContactHelper extends HelperBase {
   public void create(AddressData address) {
     fillAddressForm(address, true);
     enterAddressCreation();
+    addressCache = null;
     returnToHomePage();
   }
   public void modify(AddressData address) {
     selectAddressById(address.getId());
     fillAddressForm(address, false);
     submitAddressModification();
+    addressCache = null;
     returnToHomePage();
   }
 
@@ -88,6 +90,7 @@ public class ContactHelper extends HelperBase {
   public void delete(AddressData address) {
     selectAddressById(address.getId());
     deleteSelectAddress();
+    addressCache = null;
     returnToHomePage();
   }
   public boolean isThereAnAderess() {
@@ -99,27 +102,21 @@ public class ContactHelper extends HelperBase {
     return wd.findElements(By.name("selected[]")).size();
   }
 
-//  public List<AddressData> list() {
-//    List<AddressData> addresses = new ArrayList<AddressData>();
-//    List<WebElement> elements = wd.findElements(By.cssSelector("tr[name=entry]"));
-//    for (WebElement element : elements) {
-//      String firstname = element.findElement(By.xpath("./td[3]")).getText();
-//      String lastname = element.findElement(By.xpath("./td[2]")).getText();
-//      int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
-//      addresses.add(new AddressData().withId(id).withFirstname(firstname).withLastname(lastname));
-//    }
-//    return addresses;
-//  }
+  private Addresses addressCache = null;
+
   public Addresses all() {
-    Addresses  addresses = new Addresses();
+    if (addressCache != null) {
+      return new Addresses(addressCache);
+    }
+    addressCache = new Addresses();
     List<WebElement> elements = wd.findElements(By.cssSelector("tr[name=entry]"));
     for (WebElement element : elements) {
       String firstname = element.findElement(By.xpath("./td[3]")).getText();
       String lastname = element.findElement(By.xpath("./td[2]")).getText();
       int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
-      addresses.add(new AddressData().withId(id).withFirstname(firstname).withLastname(lastname));
+      addressCache.add(new AddressData().withId(id).withFirstname(firstname).withLastname(lastname));
     }
-    return addresses;
+    return new Addresses(addressCache);
   }
 
 
