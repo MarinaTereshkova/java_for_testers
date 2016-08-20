@@ -17,11 +17,23 @@ public class AddressCreationTests extends TestBase{
     AddressData address = new AddressData().withFirstname("name").withLastname("last").withGroup("test1");
     app.contact().create(address);
     app.goTo().homePage();
+    assertThat(app.contact().count(), equalTo(before.size() +1));
     Addresses after = app.contact().all();
-    assertThat(after.size(), equalTo(before.size() + 1));
-
     assertThat(after, equalTo(before.withAdded(
             address.withId(after.stream().mapToInt((ad) -> ad.getId()).max().getAsInt()))));
+  }
+
+  @Test
+  public void testBadAddressCreation() {
+    app.goTo().homePage();
+    Addresses before = app.contact().all();
+    app.goTo().addressCreationPage();
+    AddressData address = new AddressData().withFirstname("name'").withLastname("last").withGroup("test1");
+    app.contact().create(address);
+    app.goTo().homePage();
+    assertThat(app.contact().count(), equalTo(before.size()));
+    Addresses after = app.contact().all();
+    assertThat(after, equalTo(before));
   }
 
 }

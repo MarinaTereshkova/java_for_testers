@@ -25,8 +25,8 @@ public class AddressDeletionTests extends TestBase {
     Addresses before = app.contact().all();
     AddressData deletedAddress = before.iterator().next();
     app.contact().delete(deletedAddress);
+    assertThat(app.contact().count(), equalTo(before.size() -1));
     Addresses after = app.contact().all();
-    assertEquals(after.size(), before.size() - 1);
     assertThat(after, equalTo(before.without(deletedAddress)));
 
   }
