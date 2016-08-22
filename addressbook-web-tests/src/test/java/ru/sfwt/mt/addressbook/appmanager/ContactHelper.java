@@ -105,6 +105,21 @@ public class ContactHelper extends HelperBase {
 
   private Addresses addressCache = null;
 
+ // public Addresses all() {
+ //   if (addressCache != null) {
+ //     return new Addresses(addressCache);
+ //   }
+ //   addressCache = new Addresses();
+ //   List<WebElement> elements = wd.findElements(By.cssSelector("tr[name=entry]"));
+ //   for (WebElement element : elements) {
+ //     String firstname = element.findElement(By.xpath("./td[3]")).getText();
+ //     String lastname = element.findElement(By.xpath("./td[2]")).getText();
+ //     int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
+ //     addressCache.add(new AddressData().withId(id).withFirstname(firstname).withLastname(lastname));
+ //   }
+ //   return new Addresses(addressCache);
+ // }
+
   public Addresses all() {
     if (addressCache != null) {
       return new Addresses(addressCache);
@@ -112,14 +127,16 @@ public class ContactHelper extends HelperBase {
     addressCache = new Addresses();
     List<WebElement> elements = wd.findElements(By.cssSelector("tr[name=entry]"));
     for (WebElement element : elements) {
-      String firstname = element.findElement(By.xpath("./td[3]")).getText();
-      String lastname = element.findElement(By.xpath("./td[2]")).getText();
+      List<WebElement> cells = element.findElements(By.tagName("td"));
+      String firstname = cells.get(2).getText();
+      String lastname = cells.get(1).getText();
+      String[] phones = cells.get(5).getText().split("\n");
       int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
-      addressCache.add(new AddressData().withId(id).withFirstname(firstname).withLastname(lastname));
+      addressCache.add(new AddressData().withId(id).withFirstname(firstname).withLastname(lastname)
+              .withHomenumber(phones[0]).withtMobilenumber(phones[1]).withWorknumber(phones[2]));
     }
     return new Addresses(addressCache);
   }
-
 
   public AddressData contactInfoFromEditForm(AddressData address) {
     initContactModificationById(address.getId());
