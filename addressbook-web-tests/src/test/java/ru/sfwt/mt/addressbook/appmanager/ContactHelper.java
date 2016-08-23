@@ -1,21 +1,14 @@
 package ru.sfwt.mt.addressbook.appmanager;
 
-import com.sun.javafx.binding.StringFormatter;
 import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import ru.sfwt.mt.addressbook.model.AddressData;
 import ru.sfwt.mt.addressbook.model.Addresses;
-import ru.sfwt.mt.addressbook.model.GroupData;
 
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 public class ContactHelper extends HelperBase {
 
@@ -131,9 +124,10 @@ public class ContactHelper extends HelperBase {
       String firstname = cells.get(2).getText();
       String lastname = cells.get(1).getText();
       String allPhones = cells.get(5).getText();
+      String allEmails = cells.get(4).getText();
       int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
       addressCache.add(new AddressData().withId(id).withFirstname(firstname).withLastname(lastname)
-              .withAllPhones(allPhones));
+              .withAllPhones(allPhones).withAllEmails(allEmails));
     }
     return new Addresses(addressCache);
   }
@@ -145,9 +139,13 @@ public class ContactHelper extends HelperBase {
     String home = wd.findElement(By.name("home")).getAttribute("value");
     String mobile = wd.findElement(By.name("mobile")).getAttribute("value");
     String work = wd.findElement(By.name("work")).getAttribute("value");
+    String email = wd.findElement(By.name("email")).getAttribute("value");
+    String email2 = wd.findElement(By.name("email2")).getAttribute("value");
+    String email3 = wd.findElement(By.name("email3")).getAttribute("value");
     wd.navigate().back();
     return new AddressData().withId(address.getId()).withFirstname(firstname)
-            .withLastname(lastname).withHomenumber(home).withtMobilenumber(mobile).withWorknumber(work);
+            .withLastname(lastname).withHomenumber(home).withtMobilenumber(mobile).withWorknumber(work)
+            .withEmail1(email).withEmail2(email2).withEmail3(email3);
   }
 
   private void initContactModificationById(int id) {

@@ -14,6 +14,17 @@ public class AddressData {
   private String email2;
   private String email3;
   private String group;
+  private String allPhones;
+  private String allEmails;
+
+  public String getAllEmails() {
+    return allEmails;
+  }
+
+  public AddressData withAllEmails(String allEmails) {
+    this.allEmails = allEmails;
+    return this;
+  }
 
   public String getAllPhones() {
     return allPhones;
@@ -24,7 +35,7 @@ public class AddressData {
     return this;
   }
 
-  private String allPhones;
+
 
   public String getFirstname() {
     return firstname;
