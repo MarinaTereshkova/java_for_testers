@@ -125,9 +125,10 @@ public class ContactHelper extends HelperBase {
       String lastname = cells.get(1).getText();
       String allPhones = cells.get(5).getText();
       String allEmails = cells.get(4).getText();
+      String userAddress = cells.get(3).getText();
       int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
       addressCache.add(new AddressData().withId(id).withFirstname(firstname).withLastname(lastname)
-              .withAllPhones(allPhones).withAllEmails(allEmails));
+              .withAllPhones(allPhones).withAllEmails(allEmails).withUserAddress(userAddress));
     }
     return new Addresses(addressCache);
   }
@@ -142,10 +143,11 @@ public class ContactHelper extends HelperBase {
     String email = wd.findElement(By.name("email")).getAttribute("value");
     String email2 = wd.findElement(By.name("email2")).getAttribute("value");
     String email3 = wd.findElement(By.name("email3")).getAttribute("value");
+    String userAddress = wd.findElement(By.name("address")).getAttribute("value");
     wd.navigate().back();
     return new AddressData().withId(address.getId()).withFirstname(firstname)
             .withLastname(lastname).withHomenumber(home).withtMobilenumber(mobile).withWorknumber(work)
-            .withEmail1(email).withEmail2(email2).withEmail3(email3);
+            .withEmail1(email).withEmail2(email2).withEmail3(email3).withUserAddress(userAddress);
   }
 
   private void initContactModificationById(int id) {

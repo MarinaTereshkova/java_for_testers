@@ -17,6 +17,17 @@ public class AddressData {
   private String allPhones;
   private String allEmails;
 
+  public String getUserAddress() {
+    return userAddress;
+  }
+
+  public AddressData withUserAddress(String userAddress) {
+    this.userAddress = userAddress;
+    return this;
+  }
+
+  private String userAddress;
+
   public String getAllEmails() {
     return allEmails;
   }
