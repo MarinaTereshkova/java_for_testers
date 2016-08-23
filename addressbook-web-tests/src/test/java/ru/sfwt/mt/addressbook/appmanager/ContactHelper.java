@@ -130,10 +130,10 @@ public class ContactHelper extends HelperBase {
       List<WebElement> cells = element.findElements(By.tagName("td"));
       String firstname = cells.get(2).getText();
       String lastname = cells.get(1).getText();
-      String[] phones = cells.get(5).getText().split("\n");
+      String allPhones = cells.get(5).getText();
       int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
       addressCache.add(new AddressData().withId(id).withFirstname(firstname).withLastname(lastname)
-              .withHomenumber(phones[0]).withtMobilenumber(phones[1]).withWorknumber(phones[2]));
+              .withAllPhones(allPhones));
     }
     return new Addresses(addressCache);
   }
