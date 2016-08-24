@@ -160,4 +160,19 @@ public class ContactHelper extends HelperBase {
    // wd.findElement(By.xpath(String.format("//tr[.//input[@value='%s']]/td[8]/a", id))).click();
    // wd.findElement(By.cssSelector(String.format("a[href='edit.php?id=%s", id))).click();
   }
+
+  public AddressData contactInfoDetailsForm(AddressData address) {
+    initContactDetailsById(address.getId());
+    String fullName = wd.findElement(By.cssSelector("div#content b")).getText();
+    //String home = wd.findElement(By.name("home")).getAttribute("value");
+    //String mobile = wd.findElement(By.name("mobile")).getAttribute("value");
+    //String work = wd.findElement(By.name("work")).getAttribute("value");
+    //String userAddress = wd.findElement(By.name("address")).getAttribute("value");
+
+    return new AddressData().withId(address.getId()).withFullName(fullName);
+  }
+
+  private void initContactDetailsById(int id) {
+    wd.findElement(By.cssSelector(String.format("a[href='view.php?id=%s", id))).click();
+  }
 }
