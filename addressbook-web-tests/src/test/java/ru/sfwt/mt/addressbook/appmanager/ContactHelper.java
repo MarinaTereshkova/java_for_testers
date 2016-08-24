@@ -163,13 +163,8 @@ public class ContactHelper extends HelperBase {
 
   public AddressData contactInfoDetailsForm(AddressData address) {
     initContactDetailsById(address.getId());
-    String fullName = wd.findElement(By.cssSelector("div#content b")).getText();
-    //String home = wd.findElement(By.name("home")).getAttribute("value");
-    //String mobile = wd.findElement(By.name("mobile")).getAttribute("value");
-    //String work = wd.findElement(By.name("work")).getAttribute("value");
-    //String userAddress = wd.findElement(By.name("address")).getAttribute("value");
-
-    return new AddressData().withId(address.getId()).withFullName(fullName);
+    String fullInfo = wd.findElement(By.cssSelector("div#content")).getText();
+    return new AddressData().withId(address.getId()).withFullInfo(fullInfo);
   }
 
   private void initContactDetailsById(int id) {

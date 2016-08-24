@@ -16,6 +16,16 @@ public class AddressData {
   private String group;
   private String allPhones;
   private String allEmails;
+  private String fullInfo;
+
+  public String getFullInfo() {
+    return fullInfo;
+  }
+
+  public AddressData withFullInfo(String fullInfo) {
+    this.fullInfo = fullInfo;
+    return this;
+  }
 
   public String getFullName() {
     return fullName;

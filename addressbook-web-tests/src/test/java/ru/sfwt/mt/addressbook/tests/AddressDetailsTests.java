@@ -16,22 +16,27 @@ public class AddressDetailsTests extends TestBase{
   public void testAddressDetails() {
     app.goTo().homePage();
     AddressData address = app.contact().all().iterator().next();
-    AddressData contactInfoFromEditForm = app.contact()
-            .contactInfoFromEditForm(address);
-    AddressData contactInfoDetailsForm = app.contact()
-            .contactInfoDetailsForm(address);
+    AddressData contactInfoFromEditForm = app.contact().contactInfoFromEditForm(address);
+    AddressData contactInfoDetailsForm = app.contact().contactInfoDetailsForm(address);
 
+    String editFullInfo = mergeFullInfo(contactInfoFromEditForm);
+    String detailsFullInfo = contactInfoDetailsForm.getFullInfo();
 
-    assertThat(mergeFullName(contactInfoFromEditForm), equalTo(contactInfoDetailsForm.getFullName()));
-
-
+    assertThat(editFullInfo, equalTo(detailsFullInfo));
   }
 
-  private String mergeFullName(AddressData contactInfoFromEditForm) {
-    String result = contactInfoFromEditForm.getFirstname() + " " + contactInfoFromEditForm.getLastname();
+  private String mergeFullInfo(AddressData contactInfoFromEditForm) {
+    String result = contactInfoFromEditForm.getFirstname() + " " + contactInfoFromEditForm.getLastname()
+            + "\n" + cleaned(contactInfoFromEditForm.getUserAddress())
+            + "\n\n" + "H: " + contactInfoFromEditForm.getHomenumber()
+            + "\n" + "M: " + contactInfoFromEditForm.getMobilenumber()
+            + "\n" + "W: " + contactInfoFromEditForm.getWorknumber();
+
     return result;
-  //  return Arrays.asList(contactInfoFromEditForm.getFirstname(), contactInfoFromEditForm.getLastname())
-  //          .stream()
-  //          .filter((s) -> ! s.equals("")).collect(Collectors.joining("\\s"));
+  }
+
+  public static String cleaned(String userAddress) {
+    return userAddress.replaceAll("\\s$", "");
+
   }
 }
