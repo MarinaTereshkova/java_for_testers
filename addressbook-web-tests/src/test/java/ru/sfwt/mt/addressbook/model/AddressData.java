@@ -1,5 +1,7 @@
 package ru.sfwt.mt.addressbook.model;
 
+import java.io.File;
+
 public class AddressData {
 
 
@@ -17,6 +19,16 @@ public class AddressData {
   private String allPhones;
   private String allEmails;
   private String fullInfo;
+  private File photo;
+
+  public File getPhoto() {
+    return photo;
+  }
+
+  public AddressData withPhoto(File photo) {
+    this.photo = photo;
+    return this;
+  }
 
   public String getFullInfo() {
     return fullInfo;
