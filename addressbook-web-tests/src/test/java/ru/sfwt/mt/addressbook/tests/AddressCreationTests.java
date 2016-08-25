@@ -18,6 +18,7 @@ public class AddressCreationTests extends TestBase{
     app.goTo().addressCreationPage();
     //AddressData address = new AddressData().withFirstname("name").withLastname("last").withGroup("test1");
     File photo = new File("/src/test/resources/images.jpg");
+    AddressData address = new AddressData().withFirstname("name").withLastname("last").withPhoto(photo).withGroup("test1");
     app.contact().create(address);
     app.goTo().homePage();
     assertThat(app.contact().count(), equalTo(before.size() +1));
