@@ -5,7 +5,7 @@ import org.testng.annotations.Test;
 import ru.sfwt.mt.addressbook.model.AddressData;
 import ru.sfwt.mt.addressbook.model.Addresses;
 
-import java.io.File;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -16,11 +16,16 @@ import static org.hamcrest.MatcherAssert.assertThat;
 public class AddressCreationTests extends TestBase{
 
   @DataProvider
-  public Iterator<Object[]> validContact() {
+  public Iterator<Object[]> validContact() throws IOException {
     List<Object[]> list = new ArrayList<Object[]>();
-    list.add(new Object[] {new AddressData().withFirstname("name1").withLastname("last1").withGroup("test1")});
-    list.add(new Object[] {new AddressData().withFirstname("name2").withLastname("last2").withGroup("test1")});
-    list.add(new Object[] {new AddressData().withFirstname("name2").withLastname("last2").withGroup("test1")});
+    BufferedReader reader = new BufferedReader(new FileReader("src/test/resources/address.csv"));
+    String line = reader.readLine();
+    while (line != null) {
+      String[] split = line.split(";");
+      list.add(new Object[] {new AddressData().withFirstname(split[0]).withLastname(split[1]).withGroup("test1")});
+      line = reader.readLine();
+    }
+
     return list.iterator();
 
   }
