@@ -1,10 +1,13 @@
 package ru.sfwt.mt.addressbook.tests;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.thoughtworks.xstream.XStream;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import ru.sfwt.mt.addressbook.model.AddressData;
 import ru.sfwt.mt.addressbook.model.Addresses;
+import ru.sfwt.mt.addressbook.model.GroupData;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -18,7 +21,21 @@ import static org.hamcrest.MatcherAssert.assertThat;
 public class AddressCreationTests extends TestBase{
 
   @DataProvider
-  public Iterator<Object[]> validContact() throws IOException {
+  public Iterator<Object[]> validContactFromJson() throws IOException {
+    BufferedReader reader = new BufferedReader(new FileReader("src/test/resources/address.json"));
+    String json ="";
+    String line = reader.readLine();
+    while (line != null) {
+      json += line;
+      line = reader.readLine();
+    }
+    Gson gson = new Gson();
+    List<AddressData> addresses = gson.fromJson(json, new TypeToken<List<AddressData>>(){}.getType());
+    return addresses.stream().map((ad) -> new Object[] {ad}).collect(Collectors.toList()).iterator();
+  }
+
+  @DataProvider
+  public Iterator<Object[]> validContactFromXml() throws IOException {
     BufferedReader reader = new BufferedReader(new FileReader("src/test/resources/address.xml"));
     String xml ="";
     String line = reader.readLine();
@@ -33,7 +50,7 @@ public class AddressCreationTests extends TestBase{
   }
 
   @DataProvider
-  public Iterator<Object[]> validContactCsv() throws IOException {
+  public Iterator<Object[]> validContactFromCsv() throws IOException {
     List<Object[]> list = new ArrayList<Object[]>();
     BufferedReader reader = new BufferedReader(new FileReader("src/test/resources/address.csv"));
     String line = reader.readLine();
@@ -46,7 +63,7 @@ public class AddressCreationTests extends TestBase{
     return list.iterator();
 
   }
-  @Test(dataProvider = "validContact")
+  @Test(dataProvider = "validContactFromJson")
   public void testAddressCreation(AddressData address) {
     app.goTo().homePage();
     Addresses before = app.contact().all();
