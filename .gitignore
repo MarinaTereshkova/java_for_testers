@@ -15,3 +15,8 @@ gradle-app.setting
 .idea/workspace.xml
 addressbook-web-tests/hs_err_pid13240.log
 addressbook-web-tests/hs_err_pid15436.log
+addressbook-web-tests/src/test/resources/address.csv
+addressbook-web-tests/src/test/resources/address.xml
+addressbook-web-tests/src/test/resources/groups.csv
+addressbook-web-tests/src/test/resources/groups.xml
+addressbook-web-tests/src/test/resources/groups.json
