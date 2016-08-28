@@ -1,5 +1,6 @@
 package ru.sfwt.mt.addressbook.tests;
 
+import com.thoughtworks.xstream.XStream;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import ru.sfwt.mt.addressbook.model.AddressData;
@@ -9,6 +10,7 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -17,6 +19,21 @@ public class AddressCreationTests extends TestBase{
 
   @DataProvider
   public Iterator<Object[]> validContact() throws IOException {
+    BufferedReader reader = new BufferedReader(new FileReader("src/test/resources/address.xml"));
+    String xml ="";
+    String line = reader.readLine();
+    while (line != null) {
+      xml += line;
+      line = reader.readLine();
+    }
+    XStream xstream = new XStream();
+    xstream.processAnnotations(AddressData.class);
+    List<AddressData> addresses = (List<AddressData>)xstream.fromXML(xml);
+    return addresses.stream().map((ad) -> new Object[] {ad}).collect(Collectors.toList()).iterator();
+  }
+
+  @DataProvider
+  public Iterator<Object[]> validContactCsv() throws IOException {
     List<Object[]> list = new ArrayList<Object[]>();
     BufferedReader reader = new BufferedReader(new FileReader("src/test/resources/address.csv"));
     String line = reader.readLine();
@@ -29,7 +46,6 @@ public class AddressCreationTests extends TestBase{
     return list.iterator();
 
   }
-
   @Test(dataProvider = "validContact")
   public void testAddressCreation(AddressData address) {
     app.goTo().homePage();

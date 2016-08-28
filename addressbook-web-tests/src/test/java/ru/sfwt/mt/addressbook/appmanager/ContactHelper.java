@@ -36,11 +36,11 @@ public class ContactHelper extends HelperBase {
     type("email3", addressData.getEmail3());
     attach("photo", addressData.getPhoto());
 
-    if (creation) {
-      new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(addressData.getGroup());
-    } else {
-      Assert.assertFalse(isElementPresent(By.name("new_group")));
-    }
+  //  if (creation) {
+  //    new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(addressData.getGroup());
+  //  } else {
+  //    Assert.assertFalse(isElementPresent(By.name("new_group")));
+  //  }
   }
 
 //  public void selectAddress(int index) {
