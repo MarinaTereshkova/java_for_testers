@@ -7,7 +7,6 @@ import ru.sfwt.mt.addressbook.model.Addresses;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.testng.Assert.assertEquals;
 
 public class AddressDeletionTests extends TestBase {
 

@@ -1,8 +1,6 @@
 package ru.sfwt.mt.addressbook.tests;
 
 
-import org.hamcrest.CoreMatchers;
-import org.hamcrest.MatcherAssert;
 import org.testng.annotations.Test;
 import ru.sfwt.mt.addressbook.model.AddressData;
 
