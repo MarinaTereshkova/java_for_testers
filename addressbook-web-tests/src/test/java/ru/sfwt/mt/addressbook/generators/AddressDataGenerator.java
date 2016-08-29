@@ -54,19 +54,18 @@ public class AddressDataGenerator {
   private void saveAsJson(List<AddressData> adresses, File file) throws IOException {
     Gson gson = new GsonBuilder().setPrettyPrinting().excludeFieldsWithoutExposeAnnotation().create();
     String json = gson.toJson(adresses);
-    Writer writer = new FileWriter(file);
-    writer.write(json);
-    writer.close();
+    try (Writer writer = new FileWriter(file)) {
+      writer.write(json);
+    }
   }
 
   private void saveAsXml(List<AddressData> adresses, File file) throws IOException {
     XStream xstream = new XStream();
     xstream.processAnnotations(AddressData.class);
     String xml = xstream.toXML(adresses);
-    Writer writer = new FileWriter(file);
-    writer.write(xml);
-    writer.close();
-
+    try(Writer writer = new FileWriter(file)) {
+      writer.write(xml);
+    }
   }
 
   private void saveAsCsv(List<AddressData> adresses, File file) throws IOException {

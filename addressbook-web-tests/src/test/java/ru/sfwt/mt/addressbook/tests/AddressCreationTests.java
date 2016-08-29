@@ -22,31 +22,33 @@ public class AddressCreationTests extends TestBase{
 
   @DataProvider
   public Iterator<Object[]> validContactFromJson() throws IOException {
-    BufferedReader reader = new BufferedReader(new FileReader("src/test/resources/address.json"));
-    String json ="";
-    String line = reader.readLine();
-    while (line != null) {
-      json += line;
-      line = reader.readLine();
+    try (BufferedReader reader = new BufferedReader(new FileReader("src/test/resources/address.json"))) {
+      String json ="";
+      String line = reader.readLine();
+      while (line != null) {
+        json += line;
+        line = reader.readLine();
+      }
+      Gson gson = new Gson();
+      List<AddressData> addresses = gson.fromJson(json, new TypeToken<List<AddressData>>(){}.getType());
+      return addresses.stream().map((ad) -> new Object[] {ad}).collect(Collectors.toList()).iterator();
     }
-    Gson gson = new Gson();
-    List<AddressData> addresses = gson.fromJson(json, new TypeToken<List<AddressData>>(){}.getType());
-    return addresses.stream().map((ad) -> new Object[] {ad}).collect(Collectors.toList()).iterator();
   }
 
   @DataProvider
   public Iterator<Object[]> validContactFromXml() throws IOException {
-    BufferedReader reader = new BufferedReader(new FileReader("src/test/resources/address.xml"));
-    String xml ="";
-    String line = reader.readLine();
-    while (line != null) {
-      xml += line;
-      line = reader.readLine();
+    try (BufferedReader reader = new BufferedReader(new FileReader("src/test/resources/address.xml"))) {
+      String xml ="";
+      String line = reader.readLine();
+      while (line != null) {
+        xml += line;
+        line = reader.readLine();
+      }
+      XStream xstream = new XStream();
+      xstream.processAnnotations(AddressData.class);
+      List<AddressData> addresses = (List<AddressData>)xstream.fromXML(xml);
+      return addresses.stream().map((ad) -> new Object[] {ad}).collect(Collectors.toList()).iterator();
     }
-    XStream xstream = new XStream();
-    xstream.processAnnotations(AddressData.class);
-    List<AddressData> addresses = (List<AddressData>)xstream.fromXML(xml);
-    return addresses.stream().map((ad) -> new Object[] {ad}).collect(Collectors.toList()).iterator();
   }
 
   @DataProvider
@@ -59,7 +61,6 @@ public class AddressCreationTests extends TestBase{
       list.add(new Object[] {new AddressData().withFirstname(split[0]).withLastname(split[1]).withGroup("test1")});
       line = reader.readLine();
     }
-
     return list.iterator();
 
   }
