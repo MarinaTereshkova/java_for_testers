@@ -1,5 +1,6 @@
 package ru.sfwt.mt.addressbook.tests;
 
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import ru.sfwt.mt.addressbook.model.GroupData;
@@ -10,21 +11,22 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 public class GroupDeletionTests extends TestBase {
 
-  @BeforeTest
+  @BeforeMethod
   public void ensurePrecondition() {
-    app.goTo().groupPage();
-    if (app.group().all().size() == 0) {
+    if (app.db().groups().size() == 0) {
+      app.goTo().groupPage();
       app.group().create(new GroupData().withName("test1"));
     }
   }
 
-  @Test (enabled = false)
+  @Test
   public void testGroupDeletion() {
-    Groups before = app.group().all();
+    Groups before = app.db().groups();
     GroupData deletedGroup = before.iterator().next();
+    app.goTo().groupPage();
     app.group().delete(deletedGroup);
     assertThat(app.group().count(), equalTo(before.size() -1));
-    Groups after = app.group().all();
+    Groups after = app.db().groups();
     assertThat(after, equalTo(before.without(deletedGroup)));
   }
 }
