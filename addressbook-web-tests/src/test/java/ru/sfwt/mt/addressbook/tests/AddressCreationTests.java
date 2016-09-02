@@ -69,40 +69,40 @@ public class AddressCreationTests extends TestBase{
   @Test(dataProvider = "validContactFromJson")
   public void testAddressCreation(AddressData address) {
     app.goTo().homePage();
-    Addresses before = app.contact().all();
+    Addresses before = app.db().addresses();
     app.goTo().addressCreationPage();
     app.contact().create(address);
     app.goTo().homePage();
     assertThat(app.contact().count(), equalTo(before.size() +1));
-    Addresses after = app.contact().all();
+    Addresses after = app.db().addresses();
     assertThat(after, equalTo(before.withAdded(
             address.withId(after.stream().mapToInt((ad) -> ad.getId()).max().getAsInt()))));
   }
   @Test
   public void testAddressCreationPhoto() {
     app.goTo().homePage();
-    Addresses before = app.contact().all();
+    Addresses before = app.db().addresses();
     app.goTo().addressCreationPage();
     File photo = new File("/src/test/resources/images.jpg");
     AddressData address = new AddressData().withFirstname("name").withLastname("last").withPhoto(photo).withGroup("test1");
     app.contact().create(address);
     app.goTo().homePage();
     assertThat(app.contact().count(), equalTo(before.size() +1));
-    Addresses after = app.contact().all();
+    Addresses after = app.db().addresses();
     assertThat(after, equalTo(before.withAdded(
             address.withId(after.stream().mapToInt((ad) -> ad.getId()).max().getAsInt()))));
   }
 
-  @Test (enabled = false)
+  @Test
   public void testBadAddressCreation() {
     app.goTo().homePage();
-    Addresses before = app.contact().all();
+    Addresses before = app.db().addresses();
     app.goTo().addressCreationPage();
     AddressData address = new AddressData().withFirstname("name'").withLastname("last").withGroup("test1");
     app.contact().create(address);
     app.goTo().homePage();
     assertThat(app.contact().count(), equalTo(before.size()));
-    Addresses after = app.contact().all();
+    Addresses after = app.db().addresses();
     assertThat(after, equalTo(before));
   }
 

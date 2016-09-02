@@ -12,8 +12,9 @@ public class AddressDeletionTests extends TestBase {
 
   @BeforeTest
   public void ensurePrecondition() {
-    app.goTo().homePage();
-    if (app.contact().all().size() == 0) {
+
+    if (app.db().addresses().size() == 0) {
+      app.goTo().homePage();
       app.goTo().addressCreationPage();
       app.contact().create(new AddressData().withFirstname("name").withLastname("last").withGroup("test1"));
     }
@@ -21,14 +22,12 @@ public class AddressDeletionTests extends TestBase {
 
   @Test
   public void testAddressDeletion (){
-    Addresses before = app.contact().all();
+    Addresses before = app.db().addresses();
     AddressData deletedAddress = before.iterator().next();
+    app.goTo().homePage();
     app.contact().delete(deletedAddress);
     assertThat(app.contact().count(), equalTo(before.size() -1));
-    Addresses after = app.contact().all();
+    Addresses after = app.db().addresses();
     assertThat(after, equalTo(before.without(deletedAddress)));
-
   }
-
-
 }
