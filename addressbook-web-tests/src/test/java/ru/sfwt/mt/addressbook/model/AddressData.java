@@ -3,37 +3,85 @@ package ru.sfwt.mt.addressbook.model;
 import com.google.gson.annotations.Expose;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
+import org.hibernate.annotations.Type;
 
+import javax.persistence.*;
 import java.io.File;
 
 @XStreamAlias("contact")
+@Entity
+@Table(name = "addressbook")
 public class AddressData {
 
   @XStreamOmitField
+  @Id
+  @Column(name = "id")
   private int id = Integer.MAX_VALUE;
+
   @Expose
+  @Column(name = "firstname")
   private String firstname;
+
   @Expose
+  @Column(name = "lastname")
   private String lastname;
+
+  @Column(name = "address")
+  @Type(type = "text")
   private String address;
+
+  @Column(name = "home")
+  @Type(type = "text")
   private String homenumber;
+
+  @Column(name = "mobile")
+  @Type(type = "text")
   private String mobilenumber;
+
+  @Column(name = "work")
+  @Type(type = "text")
   private String worknumber;
+
+  @Column(name = "email")
+  @Type(type = "text")
   private String email1;
+
+  @Column(name = "email2")
+  @Type(type = "text")
   private String email2;
+
+  @Column(name = "email3")
+  @Type(type = "text")
   private String email3;
+
+  @Transient
   private String group;
+
+  @Transient
   private String allPhones;
+
+  @Transient
   private String allEmails;
+
+  @Transient
   private String fullInfo;
-  private File photo;
+
+  @Transient
+  private String fullName;
+
+  @Transient
+  private String userAddress;
+
+  @Column(name = "photo")
+  @Type(type = "text")
+  private String photo;
 
   public File getPhoto() {
-    return photo;
+    return new File(photo);
   }
 
   public AddressData withPhoto(File photo) {
-    this.photo = photo;
+    this.photo = photo.getPath();
     return this;
   }
 
@@ -55,7 +103,7 @@ public class AddressData {
     return this;
   }
 
-  private String fullName;
+
 
   public String getUserAddress() {
     return userAddress;
@@ -66,7 +114,7 @@ public class AddressData {
     return this;
   }
 
-  private String userAddress;
+
 
   public String getAllEmails() {
     return allEmails;
