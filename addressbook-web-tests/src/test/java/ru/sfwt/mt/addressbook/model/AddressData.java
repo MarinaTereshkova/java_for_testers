@@ -126,7 +126,11 @@ public class AddressData {
   }
 
   public File getPhoto() {
-    return new File(photo);
+    if (photo != null) {
+      return new File(photo);
+    } else {
+      return null;
+    }
   }
 
   public AddressData withPhoto(File photo) {
