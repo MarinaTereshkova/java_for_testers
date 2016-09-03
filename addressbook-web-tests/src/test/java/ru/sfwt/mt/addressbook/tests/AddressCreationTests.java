@@ -60,7 +60,8 @@ public class AddressCreationTests extends TestBase{
     String line = reader.readLine();
     while (line != null) {
       String[] split = line.split(";");
-      list.add(new Object[] {new AddressData().withFirstname(split[0]).withLastname(split[1]).withGroup("test1")});
+      list.add(new Object[] {new AddressData().withFirstname(split[0]).withLastname(split[1])});
+              //.withGroup("test1")});
       line = reader.readLine();
     }
     return list.iterator();
@@ -99,7 +100,8 @@ public class AddressCreationTests extends TestBase{
     app.goTo().homePage();
     Addresses before = app.db().addresses();
     app.goTo().addressCreationPage();
-    AddressData address = new AddressData().withFirstname("name'").withLastname("last").withGroup("test1");
+    AddressData address = new AddressData().withFirstname("name'").withLastname("last");
+            //.withGroup("test1");
     app.contact().create(address);
     app.goTo().homePage();
     assertThat(app.contact().count(), equalTo(before.size()));

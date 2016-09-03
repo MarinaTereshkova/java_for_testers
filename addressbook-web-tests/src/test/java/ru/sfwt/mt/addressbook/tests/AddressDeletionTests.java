@@ -16,7 +16,8 @@ public class AddressDeletionTests extends TestBase {
     if (app.db().addresses().size() == 0) {
       app.goTo().homePage();
       app.goTo().addressCreationPage();
-      app.contact().create(new AddressData().withFirstname("name").withLastname("last").withGroup("test1"));
+      app.contact().create(new AddressData().withFirstname("name").withLastname("last"));
+              //.withGroup("test1"));
     }
   }
 
