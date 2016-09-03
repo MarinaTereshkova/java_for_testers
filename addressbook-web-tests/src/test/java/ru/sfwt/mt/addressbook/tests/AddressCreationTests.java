@@ -77,6 +77,7 @@ public class AddressCreationTests extends TestBase{
     Addresses after = app.db().addresses();
     assertThat(after, equalTo(before.withAdded(
             address.withId(after.stream().mapToInt((ad) -> ad.getId()).max().getAsInt()))));
+    verifyAddressListUI();
   }
 // @Test
 // public void testAddressCreationPhoto() {
@@ -104,6 +105,7 @@ public class AddressCreationTests extends TestBase{
     assertThat(app.contact().count(), equalTo(before.size()));
     Addresses after = app.db().addresses();
     assertThat(after, equalTo(before));
+    verifyAddressListUI();
   }
 
   @Test (enabled = false)

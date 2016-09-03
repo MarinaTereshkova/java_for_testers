@@ -10,6 +10,8 @@ import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
 import ru.sfwt.mt.addressbook.appmanager.ApplicationManager;
+import ru.sfwt.mt.addressbook.model.AddressData;
+import ru.sfwt.mt.addressbook.model.Addresses;
 import ru.sfwt.mt.addressbook.model.GroupData;
 import ru.sfwt.mt.addressbook.model.Groups;
 
@@ -53,6 +55,15 @@ public class TestBase {
       Groups uiGroups = app.group().all();
       assertThat(uiGroups, equalTo(dbGroups.stream()
               .map((g) -> new GroupData().withId(g.getId()).withName(g.getName()))
+              .collect(Collectors.toSet())));
+    }
+  }
+  public void verifyAddressListUI() {
+    if (Boolean.getBoolean("verifyUI")) {
+      Addresses dbAddress = app.db().addresses();
+      Addresses uiAddress = app.contact().all();
+      assertThat(uiAddress, equalTo(dbAddress.stream().map((ad) -> new AddressData()
+              .withId(ad.getId()).withFirstname(ad.getFirstname()).withLastname(ad.getLastname()))
               .collect(Collectors.toSet())));
     }
   }
