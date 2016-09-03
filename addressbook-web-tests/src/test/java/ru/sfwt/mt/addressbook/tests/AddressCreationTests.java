@@ -7,6 +7,7 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import ru.sfwt.mt.addressbook.model.AddressData;
 import ru.sfwt.mt.addressbook.model.Addresses;
+import ru.sfwt.mt.addressbook.model.Groups;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -80,6 +81,8 @@ public class AddressCreationTests extends TestBase{
             address.withId(after.stream().mapToInt((ad) -> ad.getId()).max().getAsInt()))));
     verifyAddressListUI();
   }
+
+
 // @Test
 // public void testAddressCreationPhoto() {
 //   app.goTo().homePage();
@@ -107,6 +110,22 @@ public class AddressCreationTests extends TestBase{
     assertThat(app.contact().count(), equalTo(before.size()));
     Addresses after = app.db().addresses();
     assertThat(after, equalTo(before));
+    verifyAddressListUI();
+  }
+
+  @Test
+  public void testAddressCreationAddInGroup() {
+    Groups groups = app.db().groups();
+    app.goTo().homePage();
+    Addresses before = app.db().addresses();
+    app.goTo().addressCreationPage();
+    AddressData address = new AddressData().withFirstname("name").withLastname("last").inGroup(groups.iterator().next());
+    app.contact().create(address);
+    app.goTo().homePage();
+    assertThat(app.contact().count(), equalTo(before.size() +1));
+    Addresses after = app.db().addresses();
+    assertThat(after, equalTo(before.withAdded(
+           address.withId(after.stream().mapToInt((ad) -> ad.getId()).max().getAsInt()))));
     verifyAddressListUI();
   }
 

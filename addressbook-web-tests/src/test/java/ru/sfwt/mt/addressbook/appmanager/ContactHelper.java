@@ -36,12 +36,16 @@ public class ContactHelper extends HelperBase {
     type("email3", addressData.getEmail3());
     attach("photo", addressData.getPhoto());
 
-  //  if (creation) {
-  //    new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(addressData.getGroup());
-  //  } else {
-  //    Assert.assertFalse(isElementPresent(By.name("new_group")));
-  //  }
+    if (creation) {
+      if (addressData.getGroups().size() > 0) {
+        Assert.assertTrue(addressData.getGroups().size() == 1);
+        new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(addressData.getGroups().iterator().next().getName());
+      } else {
+        Assert.assertFalse(isElementPresent(By.name("new_group")));
+      }
+    }
   }
+
 
 //  public void selectAddress(int index) {
 //     //click(By.xpath("//table[@id='maintable']/tbody/tr[2]/td[8]/a/img"));

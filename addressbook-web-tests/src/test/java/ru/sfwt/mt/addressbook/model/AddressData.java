@@ -265,4 +265,9 @@ public class AddressData {
     this.email3 = email3;
     return this;
   }
+
+  public AddressData inGroup(GroupData group) {
+    groups.add(group);
+    return this;
+  }
 }
