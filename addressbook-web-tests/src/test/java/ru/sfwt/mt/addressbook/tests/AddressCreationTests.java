@@ -78,20 +78,20 @@ public class AddressCreationTests extends TestBase{
     assertThat(after, equalTo(before.withAdded(
             address.withId(after.stream().mapToInt((ad) -> ad.getId()).max().getAsInt()))));
   }
-  @Test
-  public void testAddressCreationPhoto() {
-    app.goTo().homePage();
-    Addresses before = app.db().addresses();
-    app.goTo().addressCreationPage();
-    File photo = new File("/src/test/resources/images.jpg");
-    AddressData address = new AddressData().withFirstname("name").withLastname("last").withPhoto(photo).withGroup("test1");
-    app.contact().create(address);
-    app.goTo().homePage();
-    assertThat(app.contact().count(), equalTo(before.size() +1));
-    Addresses after = app.db().addresses();
-    assertThat(after, equalTo(before.withAdded(
-            address.withId(after.stream().mapToInt((ad) -> ad.getId()).max().getAsInt()))));
-  }
+// @Test
+// public void testAddressCreationPhoto() {
+//   app.goTo().homePage();
+//   Addresses before = app.db().addresses();
+//   app.goTo().addressCreationPage();
+//   File photo = new File("/src/test/resources/images.jpg");
+//   AddressData address = new AddressData().withFirstname("name").withLastname("last").withPhoto(photo).withGroup("test1");
+//   app.contact().create(address);
+//   app.goTo().homePage();
+//   assertThat(app.contact().count(), equalTo(before.size() +1));
+//   Addresses after = app.db().addresses();
+//   assertThat(after, equalTo(before.withAdded(
+//           address.withId(after.stream().mapToInt((ad) -> ad.getId()).max().getAsInt()))));
+// }
 
   @Test
   public void testBadAddressCreation() {

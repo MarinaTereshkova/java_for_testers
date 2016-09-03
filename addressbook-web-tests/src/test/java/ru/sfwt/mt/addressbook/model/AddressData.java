@@ -85,21 +85,7 @@ public class AddressData {
 
     if (id != that.id) return false;
     if (firstname != null ? !firstname.equals(that.firstname) : that.firstname != null) return false;
-    if (lastname != null ? !lastname.equals(that.lastname) : that.lastname != null) return false;
-    if (address != null ? !address.equals(that.address) : that.address != null) return false;
-    if (homenumber != null ? !homenumber.equals(that.homenumber) : that.homenumber != null) return false;
-    if (mobilenumber != null ? !mobilenumber.equals(that.mobilenumber) : that.mobilenumber != null) return false;
-    if (worknumber != null ? !worknumber.equals(that.worknumber) : that.worknumber != null) return false;
-    if (email1 != null ? !email1.equals(that.email1) : that.email1 != null) return false;
-    if (email2 != null ? !email2.equals(that.email2) : that.email2 != null) return false;
-    if (email3 != null ? !email3.equals(that.email3) : that.email3 != null) return false;
-    if (group != null ? !group.equals(that.group) : that.group != null) return false;
-    if (allPhones != null ? !allPhones.equals(that.allPhones) : that.allPhones != null) return false;
-    if (allEmails != null ? !allEmails.equals(that.allEmails) : that.allEmails != null) return false;
-    if (fullInfo != null ? !fullInfo.equals(that.fullInfo) : that.fullInfo != null) return false;
-    if (fullName != null ? !fullName.equals(that.fullName) : that.fullName != null) return false;
-    if (userAddress != null ? !userAddress.equals(that.userAddress) : that.userAddress != null) return false;
-    return photo != null ? photo.equals(that.photo) : that.photo == null;
+    return lastname != null ? lastname.equals(that.lastname) : that.lastname == null;
 
   }
 
@@ -108,20 +94,6 @@ public class AddressData {
     int result = id;
     result = 31 * result + (firstname != null ? firstname.hashCode() : 0);
     result = 31 * result + (lastname != null ? lastname.hashCode() : 0);
-    result = 31 * result + (address != null ? address.hashCode() : 0);
-    result = 31 * result + (homenumber != null ? homenumber.hashCode() : 0);
-    result = 31 * result + (mobilenumber != null ? mobilenumber.hashCode() : 0);
-    result = 31 * result + (worknumber != null ? worknumber.hashCode() : 0);
-    result = 31 * result + (email1 != null ? email1.hashCode() : 0);
-    result = 31 * result + (email2 != null ? email2.hashCode() : 0);
-    result = 31 * result + (email3 != null ? email3.hashCode() : 0);
-    result = 31 * result + (group != null ? group.hashCode() : 0);
-    result = 31 * result + (allPhones != null ? allPhones.hashCode() : 0);
-    result = 31 * result + (allEmails != null ? allEmails.hashCode() : 0);
-    result = 31 * result + (fullInfo != null ? fullInfo.hashCode() : 0);
-    result = 31 * result + (fullName != null ? fullName.hashCode() : 0);
-    result = 31 * result + (userAddress != null ? userAddress.hashCode() : 0);
-    result = 31 * result + (photo != null ? photo.hashCode() : 0);
     return result;
   }
 
@@ -157,7 +129,6 @@ public class AddressData {
   }
 
 
-
   public String getUserAddress() {
     return userAddress;
   }
@@ -166,7 +137,6 @@ public class AddressData {
     this.userAddress = userAddress;
     return this;
   }
-
 
 
   public String getAllEmails() {
@@ -186,7 +156,6 @@ public class AddressData {
     this.allPhones = allPhones;
     return this;
   }
-
 
 
   public String getFirstname() {
